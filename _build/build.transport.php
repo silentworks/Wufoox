@@ -18,7 +18,7 @@ set_time_limit(0);
 /* define package names */
 define('PKG_NAME', 'Wufoox');
 define('PKG_NAME_LOWER', 'wufoox');
-define('PKG_VERSION', '1.0');
+define('PKG_VERSION', '1.0.0');
 define('PKG_RELEASE', 'beta1');
 
 /* define build paths */
@@ -168,6 +168,16 @@ $vehicle->resolve('php',array(
 
 $builder->putVehicle($vehicle);
 unset($vehicle, $menu);*/
+
+/* now pack in the license file, readme and setup options */
+$builder->setPackageAttributes(array(
+    'license' => file_get_contents($sources['docs'] . 'license.txt'),
+    'readme' => file_get_contents($sources['docs'] . 'readme.txt'),
+    'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
+    /*'setup-options' => array(
+        'source' => $sources['build'].'setup.options.php',
+    ),*/
+));
 
 /* zip up package */
 $modx->log(modX::LOG_LEVEL_INFO, 'Packing up transport package zip...');
