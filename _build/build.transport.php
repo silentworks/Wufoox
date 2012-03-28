@@ -178,6 +178,7 @@ $builder->setPackageAttributes(array(
         'source' => $sources['build'].'setup.options.php',
     ),*/
 ));
+$modx->log(modX::LOG_LEVEL_INFO,'Added package attributes and setup options.');
 
 /* zip up package */
 $modx->log(modX::LOG_LEVEL_INFO, 'Packing up transport package zip...');
