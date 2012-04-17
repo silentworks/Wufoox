@@ -1,5 +1,6 @@
 <div id="tv{$tv->id}-btn"></div>
 <input type="hidden" id="tv{$tv->id}" name="tv{$tv->id}" value="{$tv->get('value')|escape}" />
+<div id="show-form{$tv->id}" class="form-rendered" style="border: 1px solid #ccc; display: none; height: 300px; overflow: auto; padding: 5px; margin-top: 20px;">{$tv->get('value')}</div>
 
 <div id="popup" style="z-index: 99999;">
     <div id="iframe-goes-here"></div>
@@ -30,10 +31,19 @@ Ext.onReady(function() {
 
     // Pass the tvid over
     Wufoox.config.tvid = "tv{$tv->id}";
+    Wufoox.formDisplay = Ext.get("show-form{$tv->id}");
+    Wufoox.formDisplay.setVisibilityMode(2);
+    Wufoox.Btn = Ext.getCmp("tv{$tv->id}-wufoox-button");
 
     if (Ext.get('tv{$tv->id}').getValue() !== '') {
-    	Ext.getCmp(Wufoox.config.tvid + "-wufoox-button").setText("{$wfb.change}");
+    	Wufoox.Btn.setText("{$wfb.change}");
+        Wufoox.formDisplay.show();
     }
+
+    Ext.get("modx-tv-reset-{$tv->id}").on('click', function () {
+        Wufoox.Btn.setText("{$wfb.normal}");
+        Wufoox.formDisplay.hide();
+    })
 {literal}
 });
 // ]]>
